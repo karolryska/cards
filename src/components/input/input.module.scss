@@ -1,0 +1,51 @@
+.wrapper {
+    position: relative;
+    margin-bottom: 30px;
+
+    & label {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+    }
+
+    & input {
+        height: 40px;
+        width: 100%;
+        padding: 0 12px;
+        border: 1px solid var(--secondary);
+        border-radius: var(--border-radius);
+        background-color: var(--secondary-20);
+        color: var(--secondary);
+
+        &::placeholder {
+            color: var(--secondary);
+        }
+        &:focus {
+            outline: 1px solid var(--secondary);
+        }
+    }
+
+    & .message {
+        display: none;
+    }
+}
+
+.error {
+    & input {
+        border-color: var(--error);
+    }
+
+    & .message {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        transform: translateY(calc(100% + 6px));
+        font-size: 12px;
+        color: var(--error);
+    }
+}
