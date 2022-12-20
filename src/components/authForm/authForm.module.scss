@@ -1,0 +1,39 @@
+@import 'common';
+
+.wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    @include flex-column();
+    gap: 30px;
+    width: 100%;
+    transform: translate(-50%, -50%);
+
+    @include mq(md) {
+        width: 360px;
+    }
+
+    & h1 {
+        align-self: center;
+    }
+
+    & .form {
+        @include flex-column();
+        gap: 10px;
+        padding: 0;
+        border: none;
+    }
+
+    & .message {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        padding: 30px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--error);
+        background-color: var(--error-20);
+        transform: translateY(calc(100% + 40px));
+    }
+}
