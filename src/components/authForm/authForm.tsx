@@ -57,6 +57,7 @@ export const AuthForm = ({
                                 <div className={cn('fields')}>
                                     {fields.map((field) => (
                                         <Field
+                                            key={field.name}
                                             component={Input}
                                             {...field}
                                             warningMessage={
