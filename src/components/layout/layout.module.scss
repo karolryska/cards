@@ -1,0 +1,27 @@
+@import 'common';
+
+.wrapper {
+    padding-bottom: 40px;
+
+    @include flex-column();
+    margin: 0 20px;
+
+    @include mq(lg) {
+        margin: 0 calc((100vw - 1000px) / 2);
+    }
+
+    & .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 0 50px;
+        width: 100%;
+
+        & .avatar {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+        }
+    }
+}
