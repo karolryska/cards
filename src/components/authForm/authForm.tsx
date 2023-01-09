@@ -60,8 +60,11 @@ export const AuthForm = ({
                                             key={field.name}
                                             component={Input}
                                             {...field}
-                                            warningMessage={
+                                            error={!!errors[field.name]}
+                                            helperText={
                                                 touched[field.name] && errors[field.name]
+                                                    ? errors[field.name]
+                                                    : ' '
                                             }
                                         />
                                     ))}

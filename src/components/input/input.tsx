@@ -11,31 +11,33 @@ interface FieldProps {
 }
 
 interface InputProps {
+    error?: boolean;
     field?: FieldProps;
+    helperText?: string;
     label: string;
     labelVisuallyHidden?: boolean;
     name: string;
     onChange: () => void;
     placeholder: string;
     type: 'email' | 'password' | 'text';
-    warningMessage?: string;
     value: string;
 }
 
 export const Input = ({
+    error,
     field,
+    helperText,
     label,
     name,
     placeholder,
     type,
-    warningMessage,
     value,
 }: InputProps) => {
     return (
-        <div className={cx('wrapper', { error: warningMessage })}>
+        <div className={cx('wrapper', { helperText, error })}>
             <label htmlFor={name}>{label}</label>
             <input name={name} placeholder={placeholder} type={type} value={value} {...field} />
-            {warningMessage ? <p className={cx('message')}>{warningMessage}</p> : null}
+            {helperText ? <p className={cx('text')}>{helperText}</p> : null}
         </div>
     );
 };
