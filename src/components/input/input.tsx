@@ -17,7 +17,7 @@ interface InputProps {
     label: string;
     labelVisuallyHidden?: boolean;
     name: string;
-    onChange: () => void;
+    onChange: (value: string) => void;
     placeholder: string;
     type: 'email' | 'password' | 'text';
     value: string;
@@ -29,6 +29,7 @@ export const Input = ({
     helperText,
     label,
     name,
+    onChange,
     placeholder,
     type,
     value,
@@ -36,7 +37,14 @@ export const Input = ({
     return (
         <div className={cx('wrapper', { helperText, error })}>
             <label htmlFor={name}>{label}</label>
-            <input name={name} placeholder={placeholder} type={type} value={value} {...field} />
+            <input
+                name={name}
+                onChange={(e) => onChange(e.target.value)}
+                placeholder={placeholder}
+                type={type}
+                value={value}
+                {...field}
+            />
             {helperText ? <p className={cx('text')}>{helperText}</p> : null}
         </div>
     );
