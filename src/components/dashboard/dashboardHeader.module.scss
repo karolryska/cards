@@ -1,0 +1,44 @@
+@import 'common';
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 36px 1fr 36px;
+    grid-template-rows: 36px;
+    gap: 30px;
+    margin-bottom: 16px;
+
+    @include mq(md) {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        margin-bottom: 30px;
+    }
+
+    h1 {
+        font-size: 26px;
+        font-weight: 300;
+        color: var(--secondary);
+        text-align: center;
+
+        @include mq(md) {
+            grid-column: 2/4;
+        }
+    }
+}
+
+.mobile {
+    @include mq(md) {
+        display: none;
+    }
+}
+
+.desktop {
+    display: none;
+
+    @include mq(md) {
+        display: grid;
+    }
+}
+
+.searchbarMobile {
+    grid-template-columns: 1fr;
+}
