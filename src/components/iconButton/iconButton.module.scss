@@ -1,0 +1,46 @@
+@import 'common';
+
+.wrapper {
+    @include flex-center();
+    padding: 0;
+    border-radius: var(--border-radius);
+    border: none;
+    cursor: pointer;
+
+    & svg {
+        height: 50%;
+
+        & path {
+            fill: var(--primary);
+        }
+    }
+}
+
+.contained {
+    background-color: var(--secondary);
+
+    & svg {
+        height: 50%;
+
+        & path {
+            fill: var(--primary);
+        }
+    }
+}
+
+.icon {
+    background-color: transparent;
+
+    & svg {
+        height: 60%;
+
+        & path {
+            fill: var(--secondary);
+        }
+    }
+}
+
+.fullSize {
+    height: 100%;
+    width: 100%;
+}
