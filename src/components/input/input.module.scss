@@ -1,5 +1,6 @@
 .wrapper {
     position: relative;
+    height: 40px;
 
     & label {
         clip: rect(0 0 0 0);
@@ -11,22 +12,52 @@
         width: 1px;
     }
 
-    & input {
-        height: 40px;
-        width: 100%;
-        padding: 0 12px;
-        border: 1px solid var(--secondary);
-        border-radius: var(--border-radius);
-        background-color: var(--secondary-20);
-        color: var(--secondary);
+    & .innerWrapper {
+        position: relative;
+        height: 100%;
 
-        &::placeholder {
+        & input {
+            height: 100%;
+            width: 100%;
+            padding: 0 12px;
+            border: 1px solid var(--secondary);
+            border-radius: var(--border-radius);
+            background-color: var(--secondary-20);
             color: var(--secondary);
+
+            &::placeholder {
+                color: var(--secondary);
+            }
+            &:focus {
+                outline: 1px solid var(--secondary);
+            }
         }
-        &:focus {
-            outline: 1px solid var(--secondary);
+
+        & button {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            height: 40%;
+            border: none;
+            background-color: transparent;
+            padding: 0;
+            transition: 0.2s;
+            cursor: pointer;
+
+            & svg {
+                height: 100%;
+
+                & path {
+                    fill: var(--secondary);
+                }
+            }
         }
     }
+}
+
+.fullHeight {
+    height: 100%;
 }
 
 .helperText {

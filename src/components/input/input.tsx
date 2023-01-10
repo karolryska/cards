@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import classNames from 'classnames/bind';
 import styles from './input.module.scss';
 
@@ -11,8 +12,11 @@ interface FieldProps {
 }
 
 interface InputProps {
+    buttonIcon?: ReactNode;
+    buttonOnClick: () => void;
     error?: boolean;
     field?: FieldProps;
+    fullHeight?: boolean;
     helperText?: string;
     label: string;
     labelVisuallyHidden?: boolean;
@@ -24,8 +28,11 @@ interface InputProps {
 }
 
 export const Input = ({
+    buttonIcon,
+    buttonOnClick,
     error,
     field,
+    fullHeight,
     helperText,
     label,
     name,
@@ -35,16 +42,19 @@ export const Input = ({
     value,
 }: InputProps) => {
     return (
-        <div className={cx('wrapper', { helperText, error })}>
+        <div className={cx('wrapper', { helperText, error, fullHeight })}>
             <label htmlFor={name}>{label}</label>
-            <input
-                name={name}
-                onChange={(e) => onChange(e.target.value)}
-                placeholder={placeholder}
-                type={type}
-                value={value}
-                {...field}
-            />
+            <div className={cx('innerWrapper')}>
+                <input
+                    name={name}
+                    onChange={(e) => onChange(e.target.value)}
+                    placeholder={placeholder}
+                    type={type}
+                    value={value}
+                    {...field}
+                />
+                {!!buttonIcon && <button onClick={buttonOnClick}>{buttonIcon}</button>}
+            </div>
             {helperText ? <p className={cx('text')}>{helperText}</p> : null}
         </div>
     );
