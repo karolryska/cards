@@ -12,7 +12,7 @@ interface CardsProps {
     buttonLabel?: string;
     heading: string;
     items: Collection[] | Item[];
-    onCardClick: () => void;
+    onCardClick: (value: string) => void;
 }
 
 export const Dashborad = ({ buttonLabel, heading, items, onCardClick }: CardsProps) => {
