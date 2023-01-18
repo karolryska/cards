@@ -39,6 +39,40 @@ a {
     text-decoration: none;
 }
 
+.Modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include flex-column();
+    gap: 30px;
+    padding: 30px;
+    border-radius: 10px;
+    width: 80vw;
+    background-color: var(--primary);
+    color: var(--secondary);
+    transform: translate(-50%, -50%);
+
+    @include mq(md) {
+        gap: 40px;
+        width: auto;
+        padding: 50px;
+    }
+
+    & .title {
+        margin-right: 30px;
+        color: var(--secondary);
+    }
+}
+
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
 #__next {
     @include flex-column();
 }
