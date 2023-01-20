@@ -12,10 +12,11 @@ interface CardsProps {
     buttonLabel?: string;
     heading: string;
     items: Collection[] | Item[];
+    onAddClick: () => void;
     onCardClick: (value: string) => void;
 }
 
-export const Dashborad = ({ buttonLabel, heading, items, onCardClick }: CardsProps) => {
+export const Dashborad = ({ buttonLabel, heading, items, onAddClick, onCardClick }: CardsProps) => {
     const [searchValue, setSearchValue] = useState('');
     const [data, setData] = useState(items);
 
@@ -34,6 +35,7 @@ export const Dashborad = ({ buttonLabel, heading, items, onCardClick }: CardsPro
             <DashboardHeader
                 buttonLabel="Add collection"
                 heading={heading}
+                onAddClick={onAddClick}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
             />
@@ -43,7 +45,7 @@ export const Dashborad = ({ buttonLabel, heading, items, onCardClick }: CardsPro
                 ))}
             </div>
             {!!buttonLabel && (
-                <Button fullWidth type="button">
+                <Button fullWidth onClick={onAddClick} type="button">
                     {buttonLabel}
                 </Button>
             )}

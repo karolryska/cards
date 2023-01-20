@@ -13,6 +13,7 @@ const cn = classNames.bind(styles);
 interface DashboardHeaderProps {
     buttonLabel: string;
     heading: string;
+    onAddClick: () => void;
     searchValue: string;
     setSearchValue: Dispatch<SetStateAction<string>>;
 }
@@ -20,6 +21,7 @@ interface DashboardHeaderProps {
 export const DashboardHeader = ({
     buttonLabel,
     heading,
+    onAddClick,
     searchValue,
     setSearchValue,
 }: DashboardHeaderProps) => {
@@ -56,7 +58,7 @@ export const DashboardHeader = ({
                         <IconButton
                             ariaLabel={buttonLabel}
                             icon={<AddIcon />}
-                            onClick={() => setIsSearchbarActive((prev) => !prev)}
+                            onClick={onAddClick}
                             type="button"
                             variant="icon"
                         />
@@ -75,7 +77,7 @@ export const DashboardHeader = ({
                     onChange={setSearchValue}
                 />
                 <h1 className={cn('heading')}>{heading}</h1>
-                <Button fullWidth type="button">
+                <Button fullWidth onClick={onAddClick} type="button">
                     {buttonLabel}
                 </Button>
             </header>
