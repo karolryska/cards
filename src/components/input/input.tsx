@@ -13,7 +13,7 @@ interface FieldProps {
 
 interface InputProps {
     buttonIcon?: ReactNode;
-    buttonOnClick: () => void;
+    buttonOnClick?: () => void;
     error?: boolean;
     field?: FieldProps;
     fullHeight?: boolean;
@@ -22,7 +22,7 @@ interface InputProps {
     labelVisuallyHidden?: boolean;
     name: string;
     onChange: (value: string) => void;
-    placeholder: string;
+    placeholder?: string;
     type: 'email' | 'password' | 'text';
     value: string;
 }
@@ -48,7 +48,7 @@ export const Input = ({
                 <input
                     name={name}
                     onChange={(e) => onChange(e.target.value)}
-                    placeholder={placeholder}
+                    placeholder={placeholder || label}
                     type={type}
                     value={value}
                     {...field}
