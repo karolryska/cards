@@ -7,12 +7,18 @@ interface ButtonProps {
     children: string;
     disabled?: boolean;
     fullWidth?: boolean;
+    onClick: () => void;
     type: 'submit' | 'reset' | 'button';
 }
 
-export const Button = ({ children, disabled, fullWidth, type }: ButtonProps) => {
+export const Button = ({ children, disabled, fullWidth, onClick, type }: ButtonProps) => {
     return (
-        <button className={cn('wrapper', { fullWidth })} disabled={disabled} type={type}>
+        <button
+            className={cn('wrapper', { fullWidth })}
+            disabled={disabled}
+            onClick={onClick}
+            type={type}
+        >
             {children}
         </button>
     );
