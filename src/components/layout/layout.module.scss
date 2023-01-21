@@ -1,12 +1,14 @@
 @import 'common';
 
 .wrapper {
+    height: 100svh;
     padding-bottom: 40px;
 
     @include flex-column();
     margin: 0 20px;
 
     @include mq(lg) {
+        min-height: 900px;
         margin: 0 calc((100vw - 1000px) / 2);
     }
 
@@ -23,5 +25,11 @@
             border-radius: 50%;
             background-color: var(--secondary);
         }
+    }
+
+    & .content {
+        @include flex-column();
+        overflow: hidden;
+        height: 100%;
     }
 }
