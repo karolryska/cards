@@ -13,7 +13,14 @@ const mock = [
 
 describe('dashboard', () => {
     beforeEach(() => {
-        render(<Dashborad heading="collections" items={mock} onCardClick={() => null} />);
+        render(
+            <Dashborad
+                heading="collections"
+                items={mock}
+                onAddClick={() => null}
+                onCardClick={() => null}
+            />,
+        );
     });
 
     test('should render as many cards as in mock list', async () => {
