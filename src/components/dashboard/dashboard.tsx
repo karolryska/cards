@@ -3,15 +3,19 @@ import classNames from 'classnames/bind';
 import { DashboardHeader } from 'components/dashboardHeader/dashboardHeader';
 import { Button } from 'components/button/button';
 import { Card } from 'components/card/card';
-import { Item, Collection } from '../../../types';
 import styles from './dashboard.module.scss';
 
 const cn = classNames.bind(styles);
 
+interface Card {
+    id: string;
+    name: string;
+}
+
 interface CardsProps {
     buttonLabel?: string;
     heading: string;
-    items: Collection[] | Item[];
+    items: Card[];
     onAddClick: () => void;
     onCardClick: (value: string) => void;
 }
