@@ -4,21 +4,27 @@ import { Dashborad } from 'components/dashboard/dashboard';
 import { Modal } from 'components/modal/modal';
 import { Button } from 'components/button/button';
 import { Input } from 'components/input/input';
-
-const collections = [
-    { id: '1', name: 'react' },
-    { id: '2', name: 'vue' },
-    { id: '3', name: 'angular' },
-    { id: '4', name: 'svelte' },
-    { id: '5', name: 'solidjs' },
-];
+import { useCollections } from 'store';
 
 const DashboardPage = () => {
+    const collections = useCollections((state) =>
+        state.collections.map(({ id, name }) => {
+            return { id, name };
+        }),
+    );
+    const { addCollection } = useCollections();
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newCollectionName, setNewCollectionName] = useState('');
 
     const handleCardClick = (value: string) => {
         console.log(value);
+    };
+
+    const handleAdd = (name: string) => {
+        addCollection(name);
+        setIsModalOpen(false);
+        setNewCollectionName('');
     };
 
     const handleAddButtonClick = () => setIsModalOpen(true);
@@ -44,7 +50,7 @@ const DashboardPage = () => {
                     type="text"
                     value={newCollectionName}
                 />
-                <Button type="button" onClick={() => null}>
+                <Button type="button" onClick={() => handleAdd(newCollectionName)}>
                     Add
                 </Button>
             </Modal>
