@@ -12,7 +12,7 @@ interface Card {
     name: string;
 }
 
-interface CardsProps {
+interface DashboradProps {
     buttonLabel?: string;
     heading: string;
     items: Card[];
@@ -20,7 +20,13 @@ interface CardsProps {
     onCardClick: (value: string) => void;
 }
 
-export const Dashborad = ({ buttonLabel, heading, items, onAddClick, onCardClick }: CardsProps) => {
+export const Dashborad = ({
+    buttonLabel,
+    heading,
+    items,
+    onAddClick,
+    onCardClick,
+}: DashboradProps) => {
     const [searchValue, setSearchValue] = useState('');
     const [data, setData] = useState(items);
 
