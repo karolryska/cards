@@ -31,6 +31,10 @@ export const Dashborad = ({
     const [data, setData] = useState(items);
 
     useEffect(() => {
+        setData(items);
+    }, [items]);
+
+    useEffect(() => {
         setData(
             searchValue
                 ? items.filter(({ name }) =>
