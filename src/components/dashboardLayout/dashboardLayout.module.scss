@@ -1,0 +1,12 @@
+@import 'common';
+
+.wrapper {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 20px;
+    height: 100%;
+}
+
+.withButtons {
+    grid-template-rows: auto 1fr auto;
+}
