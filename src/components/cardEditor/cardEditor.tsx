@@ -1,6 +1,6 @@
 import { DashboardHeader } from 'components/dashboardHeader/dashboardHeader';
 import { CardEditorForm, CardEditorFormProps } from 'components/cardEditorForm/cardEditorForm';
-import styles from './dashboard.module.scss';
+import styles from './cardEditor.module.scss';
 
 interface CardEditorProps extends CardEditorFormProps {
     heading: string;
