@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Layout } from 'components/layout/layout';
 import { Dashborad } from 'components/dashboard/dashboard';
 import { Modal } from 'components/modal/modal';
@@ -14,11 +15,13 @@ const DashboardPage = () => {
     );
     const { addCollection } = useCollections();
 
+    const router = useRouter();
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newCollectionName, setNewCollectionName] = useState('');
 
-    const handleCardClick = (value: string) => {
-        console.log(value);
+    const handleCardClick = (collectionName: string) => {
+        router.push(`/dashboard/${collectionName}`);
     };
 
     const handleAdd = (name: string) => {
