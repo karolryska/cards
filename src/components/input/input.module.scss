@@ -16,7 +16,8 @@
         position: relative;
         height: 100%;
 
-        & input {
+        & > input,
+        & > textarea {
             height: 100%;
             width: 100%;
             padding: 0 12px;
@@ -31,6 +32,10 @@
             &:focus {
                 outline: 1px solid var(--secondary);
             }
+        }
+
+        & > textarea {
+            padding: 12px;
         }
 
         & button {

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, ChangeEvent } from 'react';
 import classNames from 'classnames/bind';
 import styles from './input.module.scss';
 
@@ -23,6 +23,7 @@ interface InputProps {
     name: string;
     onChange: (value: string) => void;
     placeholder?: string;
+    textarea?: boolean;
     type: 'email' | 'password' | 'text';
     value: string;
 }
@@ -38,21 +39,24 @@ export const Input = ({
     name,
     onChange,
     placeholder,
+    textarea,
     type,
     value,
 }: InputProps) => {
+    const textFieldProps = {
+        name,
+        onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+            onChange(e.target.value),
+        placeholder: placeholder || label,
+        type,
+        value,
+        ...field,
+    };
     return (
-        <div className={cx('wrapper', { helperText, error, fullHeight })}>
+        <div className={cx('wrapper', { helperText, error, fullHeight: fullHeight || textarea })}>
             <label htmlFor={name}>{label}</label>
             <div className={cx('innerWrapper')}>
-                <input
-                    name={name}
-                    onChange={(e) => onChange(e.target.value)}
-                    placeholder={placeholder || label}
-                    type={type}
-                    value={value}
-                    {...field}
-                />
+                {textarea ? <textarea {...textFieldProps} /> : <input {...textFieldProps} />}
                 {!!buttonIcon && <button onClick={buttonOnClick}>{buttonIcon}</button>}
             </div>
             {helperText ? <p className={cx('text')}>{helperText}</p> : null}
