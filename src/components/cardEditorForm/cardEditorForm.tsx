@@ -1,6 +1,6 @@
+import { ReactNode } from 'react';
 import classNames from 'classnames/bind';
 import { Input } from 'components/input/input';
-import { ReactNode } from 'react';
 import styles from './cardEditorForm.module.scss';
 
 const cn = classNames.bind(styles);
@@ -23,8 +23,22 @@ export const CardEditorForm = ({
     return (
         <form className={cn('wrapper')}>
             <div className={cn('textFields')}>
-                <Input name="front" label="front" onChange={setFront} type="text" value={front} />
-                <Input name="back" label="back" onChange={setBack} type="text" value={back} />
+                <Input
+                    name="front"
+                    label="front"
+                    onChange={setFront}
+                    textarea
+                    type="text"
+                    value={front}
+                />
+                <Input
+                    name="back"
+                    label="back"
+                    onChange={setBack}
+                    textarea
+                    type="text"
+                    value={back}
+                />
             </div>
             <div className={cn('buttons')}>{buttons}</div>
         </form>
