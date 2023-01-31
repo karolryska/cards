@@ -14,14 +14,16 @@ interface Card {
 
 interface DashboradProps {
     buttonLabel?: string;
+    headerButtonLabel?: string;
     heading: string;
     items: Card[];
     onAddClick: () => void;
-    onCardClick: (value: string) => void;
+    onCardClick?: (value: string) => void;
 }
 
 export const Dashborad = ({
     buttonLabel,
+    headerButtonLabel,
     heading,
     items,
     onAddClick,
@@ -47,7 +49,7 @@ export const Dashborad = ({
     return (
         <div className={cn('wrapper', { withButton: buttonLabel })}>
             <DashboardHeader
-                buttonLabel="Add collection"
+                buttonLabel={headerButtonLabel}
                 heading={heading}
                 onAddClick={onAddClick}
                 searchValue={searchValue}

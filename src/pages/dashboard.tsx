@@ -35,6 +35,7 @@ const DashboardPage = () => {
     return (
         <Layout>
             <Dashborad
+                headerButtonLabel="add collection"
                 heading="collections"
                 items={collections}
                 onAddClick={handleAddButtonClick}

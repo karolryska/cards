@@ -24,7 +24,8 @@ const CollectionPage = () => {
     return (
         <Layout>
             <Dashborad
-                heading={collectionName}
+                headerButtonLabel="add card"
+                heading={collectionName as string}
                 items={cards}
                 buttonLabel="Start quiz"
                 onAddClick={() => router.push(`${collectionName}/add`)}
