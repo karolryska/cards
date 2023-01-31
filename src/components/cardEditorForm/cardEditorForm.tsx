@@ -21,7 +21,7 @@ export const CardEditorForm = ({
     setFront,
 }: CardEditorFormProps) => {
     return (
-        <form className={cn('wrapper')}>
+        <form className={cn('wrapper')} onSubmit={(e: React.SyntheticEvent) => e.preventDefault()}>
             <div className={cn('textFields')}>
                 <Input
                     name="front"
