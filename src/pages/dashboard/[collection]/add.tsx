@@ -16,7 +16,7 @@ const AddCardPage = () => {
     const { back, front, setBack, setFront, isFilled } = useCard('', '');
 
     const handleClickSave = () => {
-        addCard(collectionName as string, front, back);
+        addCard(collectionId as string, front, back);
         router.push({
             pathname: `/dashboard/${collectionName}`,
             query: { collectionId },
