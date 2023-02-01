@@ -7,7 +7,7 @@ import { useCard } from 'hooks/useCard';
 
 const AddCardPage = () => {
     const {
-        query: { collection: collectionName },
+        query: { collection: collectionName, collectionId },
     } = useRouter();
     const router = useRouter();
 
@@ -17,7 +17,10 @@ const AddCardPage = () => {
 
     const handleClickSave = () => {
         addCard(collectionName as string, front, back);
-        router.push(`/dashboard/${collectionName}`);
+        router.push({
+            pathname: `/dashboard/${collectionName}`,
+            query: { collectionId },
+        });
     };
 
     const handleClickSaveAndAddNext = () => {

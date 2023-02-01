@@ -20,8 +20,11 @@ const DashboardPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newCollectionName, setNewCollectionName] = useState('');
 
-    const handleCardClick = (collectionName: string) => {
-        router.push(`/dashboard/${collectionName}`);
+    const handleCardClick = (collectionId: string, collectionName: string) => {
+        router.push({
+            pathname: `/dashboard/${collectionName}`,
+            query: { collectionId },
+        });
     };
 
     const handleAdd = (name: string) => {

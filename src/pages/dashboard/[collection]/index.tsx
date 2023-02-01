@@ -6,13 +6,13 @@ import { useCollections } from 'store';
 const CollectionPage = () => {
     const router = useRouter();
     const {
-        query: { collection: collectionName },
+        query: { collection: collectionName, collectionId },
     } = useRouter();
 
     const cards = useCollections(
         (state) =>
             state.collections
-                .find((item) => item.name === collectionName)
+                .find((item) => item.id === collectionId)
                 ?.items.map(({ id, front }) => {
                     return {
                         id,
@@ -21,6 +21,20 @@ const CollectionPage = () => {
                 }) || [],
     );
 
+    const handleCardClick = (cardId: string) => {
+        router.push({
+            pathname: `/dashboard/${collectionName}/edit`,
+            query: { collectionId, cardId },
+        });
+    };
+
+    const handleAddCardClick = () => {
+        router.push({
+            pathname: `/dashboard/${collectionName}/add`,
+            query: { collectionId },
+        });
+    };
+
     return (
         <Layout>
             <Dashborad
@@ -28,7 +42,8 @@ const CollectionPage = () => {
                 heading={collectionName as string}
                 items={cards}
                 buttonLabel="Start quiz"
-                onAddClick={() => router.push(`${collectionName}/add`)}
+                onAddClick={handleAddCardClick}
+                onCardClick={handleCardClick}
             />
         </Layout>
     );
