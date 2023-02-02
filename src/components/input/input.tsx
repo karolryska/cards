@@ -44,6 +44,7 @@ export const Input = ({
     value,
 }: InputProps) => {
     const textFieldProps = {
+        id: name,
         name,
         onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
             onChange(e.target.value),
