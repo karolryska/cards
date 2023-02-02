@@ -9,7 +9,7 @@ export const useCard = (backValue: string, frontValue: string) => {
     }, [backValue]);
 
     useEffect(() => {
-        setBack(frontValue);
+        setFront(frontValue);
     }, [frontValue]);
 
     return { back, front, setBack, setFront, isFilled: !!(front && back) };
