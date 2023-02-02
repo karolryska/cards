@@ -26,7 +26,7 @@ const AddCardPage = () => {
     const handleClickSaveAndAddNext = () => {
         setFront('');
         setBack('');
-        addCard(collectionName as string, front, back);
+        addCard(collectionId as string, front, back);
     };
 
     return (
