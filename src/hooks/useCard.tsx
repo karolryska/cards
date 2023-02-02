@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 
-export const useCard = (backValue: string, frontValue: string) => {
+export const useCard = (frontValue: string, backValue: string) => {
     const [front, setFront] = useState(frontValue);
     const [back, setBack] = useState(backValue);
-
-    useEffect(() => {
-        setBack(backValue);
-    }, [backValue]);
 
     useEffect(() => {
         setFront(frontValue);
     }, [frontValue]);
 
-    return { back, front, setBack, setFront, isFilled: !!(front && back) };
+    useEffect(() => {
+        setBack(backValue);
+    }, [backValue]);
+
+    return { front, back, setFront, setBack, isFilled: !!(front && back) };
 };
