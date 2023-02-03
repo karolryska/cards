@@ -1,27 +1,35 @@
-import { ReactNode } from 'react';
 import classNames from 'classnames/bind';
+import { useCard } from 'hooks/useCard';
 import { Input } from 'components/input/input';
+import { Button } from 'components/button/button';
 import styles from './cardEditorForm.module.scss';
 
 const cn = classNames.bind(styles);
 
+export type CardEditorButtonsType = {
+    label: string;
+    type: 'submit' | 'button';
+    onClick: () => void;
+}[];
+
 export type CardEditorFormProps = {
-    back: string;
-    buttons: ReactNode;
-    front: string;
-    setBack: (value: string) => void;
-    setFront: (value: string) => void;
+    buttons: CardEditorButtonsType;
+    onSubmit: (front: string, back: string) => void;
 };
 
-export const CardEditorForm = ({
-    back,
-    buttons,
-    front,
-    setBack,
-    setFront,
-}: CardEditorFormProps) => {
+export const CardEditorForm = ({ onSubmit, buttons }: CardEditorFormProps) => {
+    const { back, front, setBack, setFront, isFilled } = useCard('', '');
+
     return (
-        <form className={cn('wrapper')} onSubmit={(e: React.SyntheticEvent) => e.preventDefault()}>
+        <form
+            className={cn('wrapper')}
+            onSubmit={(e: React.SyntheticEvent) => {
+                e.preventDefault();
+                onSubmit(front, back);
+                setFront('');
+                setBack('');
+            }}
+        >
             <div className={cn('textFields')}>
                 <Input
                     name="front"
@@ -40,7 +48,13 @@ export const CardEditorForm = ({
                     value={back}
                 />
             </div>
-            <div className={cn('buttons')}>{buttons}</div>
+            <div className={cn('buttons')}>
+                {buttons.map(({ label, type, onClick }) => (
+                    <Button type={type} onClick={onClick} disabled={type === 'submit' && !isFilled}>
+                        {label}
+                    </Button>
+                ))}
+            </div>
         </form>
     );
 };

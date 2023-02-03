@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
-import { Layout } from 'components/layout/layout';
-import { Button } from 'components/button/button';
 import { useCollections } from 'store';
+import { Layout } from 'components/layout/layout';
 import { CardEditor } from 'components/cardEditor/cardEditor';
-import { useCard } from 'hooks/useCard';
+import { CardEditorButtonsType } from 'components/cardEditorForm/cardEditorForm';
 
 const AddCardPage = () => {
     const {
@@ -13,44 +12,33 @@ const AddCardPage = () => {
 
     const { addCard } = useCollections();
 
-    const { back, front, setBack, setFront, isFilled } = useCard('', '');
-
-    const handleClickSave = () => {
-        addCard(collectionId as string, front, back);
-        router.push({
-            pathname: `/dashboard/${collectionName}`,
-            query: { collectionId },
-        });
-    };
-
-    const handleClickSaveAndAddNext = () => {
-        setFront('');
-        setBack('');
+    const handleSubmit = (front: string, back: string) => {
         addCard(collectionId as string, front, back);
     };
+
+    const buttons: CardEditorButtonsType = [
+        {
+            label: 'save',
+            type: 'submit',
+            onClick: () =>
+                router.push({
+                    pathname: `/dashboard/${collectionName}`,
+                    query: { collectionId },
+                }),
+        },
+        {
+            label: 'save and add next',
+            type: 'submit',
+            onClick: () => null,
+        },
+    ];
 
     return (
         <Layout>
             <CardEditor
-                back={back}
-                buttons={
-                    <>
-                        <Button disabled={!isFilled} onClick={handleClickSave} type="button">
-                            save
-                        </Button>
-                        <Button
-                            disabled={!isFilled}
-                            onClick={handleClickSaveAndAddNext}
-                            type="button"
-                        >
-                            save and add next
-                        </Button>
-                    </>
-                }
-                front={front}
+                buttons={buttons}
                 heading={collectionName as string}
-                setBack={setBack}
-                setFront={setFront}
+                onSubmit={handleSubmit}
             />
         </Layout>
     );

@@ -6,24 +6,11 @@ interface CardEditorProps extends CardEditorFormProps {
     heading: string;
 }
 
-export const CardEditor = ({
-    back,
-    buttons,
-    front,
-    heading,
-    setBack,
-    setFront,
-}: CardEditorProps) => {
+export const CardEditor = ({ buttons, heading, onSubmit }: CardEditorProps) => {
     return (
         <div className={styles.wrapper}>
             <DashboardHeader heading={heading} />
-            <CardEditorForm
-                back={back}
-                buttons={buttons}
-                front={front}
-                setBack={setBack}
-                setFront={setFront}
-            />
+            <CardEditorForm buttons={buttons} onSubmit={onSubmit} />
         </div>
     );
 };
