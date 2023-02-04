@@ -14,11 +14,15 @@ export type CardEditorButtonsType = {
 
 export type CardEditorFormProps = {
     buttons: CardEditorButtonsType;
+    card: {
+        front: string;
+        back: string;
+    };
     onSubmit: (front: string, back: string) => void;
 };
 
-export const CardEditorForm = ({ onSubmit, buttons }: CardEditorFormProps) => {
-    const { back, front, setBack, setFront, isFilled } = useCard('', '');
+export const CardEditorForm = ({ buttons, card, onSubmit }: CardEditorFormProps) => {
+    const { back, front, setBack, setFront, isFilled } = useCard(card.front || '', card.back || '');
 
     return (
         <form
@@ -26,8 +30,8 @@ export const CardEditorForm = ({ onSubmit, buttons }: CardEditorFormProps) => {
             onSubmit={(e: React.SyntheticEvent) => {
                 e.preventDefault();
                 onSubmit(front, back);
-                setFront('');
-                setBack('');
+                setFront('asd');
+                setBack('asd');
             }}
         >
             <div className={cn('textFields')}>

@@ -37,6 +37,7 @@ const AddCardPage = () => {
         <Layout>
             <CardEditor
                 buttons={buttons}
+                card={{ front: '', back: '' }}
                 heading={collectionName as string}
                 onSubmit={handleSubmit}
             />
