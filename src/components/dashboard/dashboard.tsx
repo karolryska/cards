@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { DashboardHeader } from 'components/dashboardHeader/dashboardHeader';
 import { Button } from 'components/button/button';
-import { Card } from 'components/card/card';
+import { Card, OnCardClick } from 'components/card/card';
 import styles from './dashboard.module.scss';
 
 const cn = classNames.bind(styles);
@@ -11,14 +11,13 @@ interface Card {
     id: string;
     name: string;
 }
-
 interface DashboradProps {
     buttonLabel?: string;
     headerButtonLabel?: string;
     heading: string;
     items: Card[];
     onAddClick: () => void;
-    onCardClick?: (value: string) => void;
+    onCardClick: OnCardClick;
 }
 
 export const Dashborad = ({
@@ -56,8 +55,8 @@ export const Dashborad = ({
                 setSearchValue={setSearchValue}
             />
             <div className={styles.scrollWrapper}>
-                {data.map(({ name }) => (
-                    <Card title={name} onClick={onCardClick} />
+                {data.map(({ id, name }) => (
+                    <Card key={id} id={id} title={name} onClick={onCardClick} />
                 ))}
             </div>
             {!!buttonLabel && (
