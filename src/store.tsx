@@ -6,9 +6,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { Collection } from 'root/types';
 
 interface State {
-    collections: Collection[] | [];
+    collections: Collection[];
     addCollection: (name: string) => void;
     addCard: (collectionId: string, front: string, back: string) => void;
+    editCard: (collectionId: string, cardId: string, front: string, back: string) => void;
+    removeCard: (collectionId: string, cardId: string) => void;
 }
 
 export const useCollections = create<State>()(
@@ -34,6 +36,29 @@ export const useCollections = create<State>()(
                         ...state.collections[collectionIndex].items,
                         newCard,
                     ];
+                }),
+            editCard: (collectionId, cardId, front, back) =>
+                set((state) => {
+                    const collectionIndex = state.collections.findIndex(
+                        ({ id }) => id === collectionId,
+                    );
+                    const cardIndex = state.collections[collectionIndex].items.findIndex(
+                        ({ id }) => id === collectionId,
+                    );
+                    state.collections[collectionIndex].items[cardIndex] = {
+                        ...state.collections[collectionIndex].items[cardIndex],
+                        front,
+                        back,
+                    };
+                }),
+            removeCard: (collectionId, cardId) =>
+                set((state) => {
+                    const collectionIndex = state.collections.findIndex(
+                        ({ id }) => id === collectionId,
+                    );
+                    state.collections[collectionIndex].items = state.collections[
+                        collectionIndex
+                    ].items.filter(({ id }) => id !== cardId);
                 }),
         })),
     ),
