@@ -30,8 +30,8 @@ export const CardEditorForm = ({ buttons, card, onSubmit }: CardEditorFormProps)
             onSubmit={(e: React.SyntheticEvent) => {
                 e.preventDefault();
                 onSubmit(front, back);
-                setFront('asd');
-                setBack('asd');
+                setFront('');
+                setBack('');
             }}
         >
             <div className={cn('textFields')}>
