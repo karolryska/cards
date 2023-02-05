@@ -43,7 +43,7 @@ export const useCollections = create<State>()(
                         ({ id }) => id === collectionId,
                     );
                     const cardIndex = state.collections[collectionIndex].items.findIndex(
-                        ({ id }) => id === collectionId,
+                        ({ id }) => id === cardId,
                     );
                     state.collections[collectionIndex].items[cardIndex] = {
                         ...state.collections[collectionIndex].items[cardIndex],
