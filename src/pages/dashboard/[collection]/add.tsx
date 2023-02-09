@@ -39,6 +39,12 @@ const AddCardPage = () => {
                 buttons={buttons}
                 card={{ front: '', back: '' }}
                 heading={collectionName as string}
+                onReturnClick={() =>
+                    router.push({
+                        pathname: `/dashboard/${collectionName}`,
+                        query: { collectionId },
+                    })
+                }
                 onSubmit={handleSubmit}
             />
         </Layout>

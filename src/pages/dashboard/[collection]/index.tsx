@@ -38,12 +38,13 @@ const CollectionPage = () => {
     return (
         <Layout>
             <Dashborad
-                headerButtonLabel="add card"
+                addButtonLabel="add card"
                 heading={collectionName as string}
                 items={cards}
                 buttonLabel="Start quiz"
                 onAddClick={handleAddCardClick}
                 onCardClick={handleCardClick}
+                onReturnClick={() => router.push('/dashboard')}
             />
         </Layout>
     );

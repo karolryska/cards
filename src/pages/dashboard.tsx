@@ -38,11 +38,12 @@ const DashboardPage = () => {
     return (
         <Layout>
             <Dashborad
-                headerButtonLabel="add collection"
+                addButtonLabel="add collection"
                 heading="collections"
                 items={collections}
                 onAddClick={handleAddButtonClick}
                 onCardClick={handleCardClick}
+                onReturnClick={() => router.push('/')}
             />
             <Modal
                 closeOnClickOutside

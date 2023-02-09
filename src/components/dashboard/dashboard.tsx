@@ -7,26 +7,29 @@ import styles from './dashboard.module.scss';
 
 const cn = classNames.bind(styles);
 
-interface Card {
+type Card = {
     id: string;
     name: string;
-}
-interface DashboradProps {
+};
+
+type DashboradProps = {
+    addButtonLabel: string;
     buttonLabel?: string;
-    headerButtonLabel?: string;
     heading: string;
     items: Card[];
     onAddClick: () => void;
     onCardClick: OnCardClick;
-}
+    onReturnClick: () => void;
+};
 
 export const Dashborad = ({
+    addButtonLabel,
     buttonLabel,
-    headerButtonLabel,
     heading,
     items,
     onAddClick,
     onCardClick,
+    onReturnClick,
 }: DashboradProps) => {
     const [searchValue, setSearchValue] = useState('');
     const [data, setData] = useState(items);
@@ -48,9 +51,10 @@ export const Dashborad = ({
     return (
         <div className={cn('wrapper', { withButton: buttonLabel })}>
             <DashboardHeader
-                buttonLabel={headerButtonLabel}
+                addButtonLabel={addButtonLabel}
                 heading={heading}
                 onAddClick={onAddClick}
+                onReturnClick={onReturnClick}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
             />
