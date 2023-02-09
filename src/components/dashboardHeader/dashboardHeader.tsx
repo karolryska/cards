@@ -1,43 +1,84 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import classNames from 'classnames/bind';
-import { Button } from 'components/button/button';
+import { useDeviceSize } from 'context/deviceWidth';
 import { IconButton } from 'components/iconButton/iconButton';
 import { Input } from 'components/input/input';
 import SearchIcon from 'assets/icons/search.svg';
 import ResetIcon from 'assets/icons/reset.svg';
 import AddIcon from 'assets/icons/add.svg';
+import ArrowLeftIcon from 'assets/icons/arrow-left.svg';
 import styles from './dashboardHeader.module.scss';
 
 const cn = classNames.bind(styles);
 
-interface DashboardHeaderProps {
-    buttonLabel: string;
+type CommonProps = {
     heading: string;
-    onAddClick: () => void;
-    searchValue: string;
-    setSearchValue: Dispatch<SetStateAction<string>>;
-}
+    onReturnClick: () => void;
+};
+
+type ConditionalProps =
+    | {
+          addButtonLabel: string;
+          onAddClick: () => void;
+          searchValue: string;
+          setSearchValue: Dispatch<SetStateAction<string>>;
+      }
+    | { addButtonLabel?: null; onAddClick?: null; searchValue?: null; setSearchValue?: null };
+
+type Props = CommonProps & ConditionalProps;
 
 export const DashboardHeader = ({
-    buttonLabel,
+    addButtonLabel,
     heading,
     onAddClick,
+    onReturnClick,
     searchValue,
     setSearchValue,
-}: DashboardHeaderProps) => {
+}: Props) => {
     const [isSerchbarActive, setIsSearchbarActive] = useState(false);
+    const { isMobile } = useDeviceSize();
+
+    if (isMobile && isSerchbarActive && setSearchValue) {
+        return (
+            <Input
+                buttonIcon={<ResetIcon />}
+                buttonOnClick={() => setIsSearchbarActive(false)}
+                label="search"
+                name="search"
+                placeholder="search"
+                type="text"
+                value={searchValue}
+                onChange={setSearchValue}
+            />
+        );
+    }
 
     return (
-        <>
-            <header className={cn('wrapper', 'mobile', { searchbarMobile: isSerchbarActive })}>
-                {isSerchbarActive ? (
+        <header className={cn('wrapper')}>
+            {!isSerchbarActive ? (
+                <div className={cn('buttons')}>
+                    <IconButton
+                        ariaLabel="show searchbar"
+                        icon={<ArrowLeftIcon />}
+                        onClick={onReturnClick}
+                        type="button"
+                        variant="icon"
+                    />
+                    {setSearchValue && (
+                        <IconButton
+                            ariaLabel="show searchbar"
+                            icon={<SearchIcon />}
+                            onClick={() => setIsSearchbarActive(true)}
+                            type="button"
+                            variant="icon"
+                        />
+                    )}
+                </div>
+            ) : (
+                setSearchValue && (
                     <Input
                         buttonIcon={<ResetIcon />}
-                        buttonOnClick={() => {
-                            setIsSearchbarActive((prev) => !prev);
-                            setSearchValue('');
-                        }}
-                        fullHeight
+                        buttonOnClick={() => setIsSearchbarActive(false)}
                         label="search"
                         name="search"
                         placeholder="search"
@@ -45,42 +86,20 @@ export const DashboardHeader = ({
                         value={searchValue}
                         onChange={setSearchValue}
                     />
-                ) : (
-                    <>
-                        <IconButton
-                            ariaLabel="show searchbar"
-                            icon={<SearchIcon />}
-                            onClick={() => setIsSearchbarActive((prev) => !prev)}
-                            type="button"
-                            variant="icon"
-                        />
-                        <h1 className={cn('heading')}>{heading}</h1>
-                        <IconButton
-                            ariaLabel={buttonLabel}
-                            icon={<AddIcon />}
-                            onClick={onAddClick}
-                            type="button"
-                            variant="icon"
-                        />
-                    </>
+                )
+            )}
+            <h1 className={cn('heading')}>{heading}</h1>
+            <div className={cn('buttons--right')}>
+                {onAddClick && (
+                    <IconButton
+                        ariaLabel={addButtonLabel}
+                        icon={<AddIcon />}
+                        onClick={onAddClick}
+                        type="button"
+                        variant="icon"
+                    />
                 )}
-            </header>
-            <header className={cn('wrapper', 'desktop', { searchbarMobile: isSerchbarActive })}>
-                <Input
-                    buttonIcon={!!searchValue && <ResetIcon />}
-                    buttonOnClick={() => setSearchValue('')}
-                    label="search"
-                    name="search"
-                    placeholder="search"
-                    type="text"
-                    value={searchValue}
-                    onChange={setSearchValue}
-                />
-                <h1 className={cn('heading')}>{heading}</h1>
-                <Button fullWidth onClick={onAddClick} type="button">
-                    {buttonLabel}
-                </Button>
-            </header>
-        </>
+            </div>
+        </header>
     );
 };

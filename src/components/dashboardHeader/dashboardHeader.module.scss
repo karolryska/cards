@@ -3,13 +3,17 @@
 .wrapper {
     display: grid;
     grid-template-columns: 36px 1fr 36px;
-    grid-template-rows: 36px;
+    // grid-template-rows: 36px;
     gap: 30px;
 
     @include mq(md) {
         grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: auto;
+        // grid-template-rows: auto;
         margin-bottom: 30px;
+    }
+
+    .mainColumn {
+        display: flex;
     }
 
     h1 {
@@ -20,6 +24,17 @@
 
         @include mq(md) {
             grid-column: 2/4;
+        }
+    }
+
+    & .buttons {
+        display: flex;
+        // justify-content: flex-end;
+        gap: 15px;
+
+        &--right {
+            display: flex;
+            justify-content: flex-end;
         }
     }
 }
