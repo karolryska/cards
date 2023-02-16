@@ -3,12 +3,10 @@
 .wrapper {
     display: grid;
     grid-template-columns: 36px 1fr 36px;
-    // grid-template-rows: 36px;
     gap: 30px;
 
     @include mq(md) {
         grid-template-columns: repeat(4, 1fr);
-        // grid-template-rows: auto;
         margin-bottom: 30px;
     }
 
@@ -29,7 +27,6 @@
 
     & .buttons {
         display: flex;
-        // justify-content: flex-end;
         gap: 15px;
 
         &--right {
