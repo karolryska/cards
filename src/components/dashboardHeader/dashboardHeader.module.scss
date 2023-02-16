@@ -4,10 +4,10 @@
     display: grid;
     grid-template-columns: 36px 1fr 36px;
     gap: 30px;
+    height: 40px;
 
     @include mq(md) {
         grid-template-columns: repeat(4, 1fr);
-        margin-bottom: 30px;
     }
 
     .mainColumn {
